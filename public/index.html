@@ -5,10 +5,18 @@
     <!-- socket.io -->
     <script src="http://localhost:5000/socket.io/socket.io.js"></script>
     <!-- style -->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
 <h1>so-front</h1>
 <p>this socket.io font</p>
+
+<script>
+    var socket = io.connect('http://localhost:5000');
+    socket.on('this', function (data) {
+        console.log(data);
+        socket.emit('my other event', {my: 'data'});
+    });
+</script>
 </body>
 </html>
