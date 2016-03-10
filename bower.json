@@ -1,0 +1,19 @@
+{
+  "name": "so-front",
+  "description": "",
+  "main": "./bin/www",
+  "authors": [
+    "huayun321 <huayun321@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/huayun321/so-front",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
