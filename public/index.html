@@ -3,32 +3,67 @@
 <head>
     <title>so-front</title>
     <!-- socket.io -->
-    <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+    <script src="/javascripts/room.js"></script>
     <!-- style -->
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
 <h1>so-front</h1>
-<p>this socket.io font</p>
+<p>this socket.io front</p>
+<p>
+    room name: <span id="roomName"></span><br>
+    broadcast: <input id="msg" type="text"><button id="b-btn">send</button><br>
+    broadcast num: <button id="bn-btn">send</button><br>
+</p>
 
+<script src="/jquery/dist/jquery.min.js"></script>
 <script>
-    var socket = io.connect('http://localhost:5000');
-    socket.on('this', function (data) {
-        console.log(data);
-        socket.emit('my other event', {my: 'data'});
+    $(document).ready(function() {
+        var room = new SENSORO.room('http://localhost:5000');
+        console.log(room);
+
+        room.create(function(roomName) {
+            $('#roomName').text(roomName);
+        });
+
+        room.onError(function(data) {
+            console.log(data);
+        });
+
+        room.onJoin(function(data) {
+            console.log(data);
+        });
+
+        room.onBroadcast(function(data) {
+            console.log(data);
+        });
+
+        room.onBroadcastNum(function(data) {
+            console.log(data);
+        });
+
+        $('#b-btn').click(function() {
+            var msg = $('#msg').val();
+            var roomName = $('#roomName').text();
+            console.log('room name ', roomName);
+
+            room.broadcast(roomName, msg);
+
+            console.log('broadcast sent');
+        });
+
+        $('#bn-btn').click(function() {
+            var roomName = $('#roomName').text();
+
+            room.broadcastNum(roomName);
+
+            console.log('broadcast num sent');
+        });
+
+//      test no callback
+//        room.create();
     });
 
-    //create room
-    //emit
-
-    //join room
-    //get roomName from Url
-
-    //broadcast room
-    //emit
-
-    //broadcast num
-    //emit
 
 
 

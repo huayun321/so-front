@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>so-front</title>
+    <!-- socket.io -->
+    <script src="/javascripts/room.js"></script>
+    <!-- style -->
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1>so-front</h1>
+<p>this socket.io front</p>
+
+<p>
+    room name    : <input id="roomName" type="text">
+    <button id="btn">join</button><br>
+    broadcast    : <input type="text"><button id="b-btn">send</button><br>
+    broadcast num: <button id="bn-btn">send</button><br>
+</p>
+
+<script src="/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var room = new SENSORO.room('http://localhost:5000');
+        console.log(room);
+        room.onError(function(data) {
+            console.log(data);
+        });
+//        room.create(function(roomName) {
+//            $('#roomName').text(roomName);
+//        });
+
+        $('#btn').click(function() {
+            var roomName = $('#roomName').val();
+            var opts = {
+                roomName: roomName,
+                msg: {a: 'a', b:'b'},
+                size: 22,
+            };
+            room.join('string', function(data) {
+                console.log(data);
+            });
+            console.log('join sent');
+        });
+    });
+
+
+
+
+</script>
+</body>
+</html>
