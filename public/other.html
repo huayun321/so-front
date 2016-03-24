@@ -14,7 +14,7 @@
 <p>
     room name    : <input id="roomName" type="text">
     <button id="btn">join</button><br>
-    broadcast    : <input type="text"><button id="b-btn">send</button><br>
+    broadcast    : <input id="msg" type="text"><button id="b-btn">send</button><br>
     broadcast num: <button id="bn-btn">send</button><br>
 </p>
 
@@ -22,26 +22,54 @@
 <script>
     $(document).ready(function() {
         var room = new SENSORO.room('http://localhost:5000');
-        console.log(room);
+
         room.onError(function(data) {
             console.log(data);
         });
-//        room.create(function(roomName) {
-//            $('#roomName').text(roomName);
-//        });
+
+        room.onJoin(function(data) {
+            console.log(data);
+        });
+
+        room.onBroadcast(function(data) {
+            console.log(data);
+        });
+
+        room.onBroadcastNum(function(data) {
+            console.log(data);
+        });
 
         $('#btn').click(function() {
+            var msg = $('#msg').val();
             var roomName = $('#roomName').val();
-            var opts = {
-                roomName: roomName,
-                msg: {a: 'a', b:'b'},
-                size: 22,
-            };
-            room.join('string', function(data) {
-                console.log(data);
+
+            console.log('room msg', msg);
+
+            console.log('room name', roomName);
+
+            room.join({roomName: roomName, joinMsg: msg}, function(msg) {
+                console.log('join room', msg);
             });
-            console.log('join sent');
         });
+
+        $('#b-btn').click(function() {
+            var msg = $('#msg').val();
+            var roomName = $('#roomName').val();
+            console.log('room name ', roomName);
+
+            room.broadcast(roomName, msg);
+
+            console.log('broadcast sent');
+        });
+
+        $('#bn-btn').click(function() {
+            var roomName = $('#roomName').val();
+
+            room.broadcastNum(roomName);
+
+            console.log('broadcast num sent');
+        });
+
     });
 
 
