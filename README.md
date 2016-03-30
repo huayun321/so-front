@@ -243,6 +243,49 @@ room.onError(function(msgObj) {
 
 ```
 
+### room.onDisconnect(callback)
+监听当前所加入房间的服务器断开事件。
+
+* callback function 回调方法。必填。
+
+```
+var url = 'http://localhost:5000';//接口服务器url
+var room = new SENSORO.room(url);
+
+room.onDisconnect(function() {
+  //执行重连获输出提示信息
+});
+
+```
+
+### room.onConnect(callback)
+监听当前所加入房间的服务器断开连接事件。
+
+* callback function 回调方法。必填。
+
+```
+var url = 'http://localhost:5000';//接口服务器url
+var room = new SENSORO.room(url);
+
+room.onConnect(function() {
+  //当连接后执行某些操作
+});
+
+```
+
+### room.reConnect()
+重新连接服务器。
+
+```
+var url = 'http://localhost:5000';//接口服务器url
+var room = new SENSORO.room(url);
+
+room.onDisconnect(function() {
+  room.reConnect();
+});
+```
+
+
 
 # SENSORO ROOM API ERROR CODE
 Server端返回的错误信息码。
