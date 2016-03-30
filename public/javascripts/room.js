@@ -7303,7 +7303,7 @@ function room() {
 
     this.server_url = 'http://room.oocomic.com';
 
-    this.socket = io.connect(this.server_url);
+    this.socket = io.connect(this.server_url, {'reconnect': false});
 
     this.socket.on('connect', function() {
         self.timer = setInterval(function() {
@@ -7353,7 +7353,7 @@ function room() {
         });
     }
 
-    this.onDisconnect = function() {
+    this.onDisconnect = function(cb) {
         self.connected = false;
         clearInterval(self.timer);
         self.socket.on('disconnect', function(data) {
@@ -7362,7 +7362,7 @@ function room() {
     }
 
     this.reConnect = function() {
-        self.socket = io.connect(self.server_url);
+        self.socket = io.connect(self.server_url, {'reconnect': false});
     }
 
     // this.onConnect = function(cb) {

@@ -42,6 +42,10 @@
             console.log(data);
         });
 
+        room.onDisconnect(function(data) {
+            console.log('disconnected ', data);
+        })
+
         $('#b-btn').click(function() {
             var msg = $('#msg').val();
             var roomName = $('#roomName').text();
