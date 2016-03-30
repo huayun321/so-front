@@ -7354,9 +7354,9 @@ function room() {
     }
 
     this.onDisconnect = function(cb) {
-        self.connected = false;
-        clearInterval(self.timer);
         self.socket.on('disconnect', function(data) {
+            self.connected = false;
+            clearInterval(self.timer);
             cb(data);
         });
     }
@@ -7365,10 +7365,17 @@ function room() {
         self.socket = io.connect(self.server_url, {'reconnect': false});
     }
 
-    // this.onConnect = function(cb) {
-    //     cb();
-    // }
-    //
+    this.onConnect = function(cb) {
+        self.socket.on('connect', function() {
+            self.timer = setInterval(function() {
+                self.socket.emit('heartbeat');
+            }, 30000);
+
+            self.connected = true;
+            cb();
+        });
+    }
+
     return this;
 }
 
