@@ -7298,9 +7298,20 @@
 
 
 function room() {
-    var server_url = 'http://room.oocomic.com';
+
     var self = this;
-    this.socket = io.connect(server_url);
+
+    this.server_url = 'http://room.oocomic.com';
+
+    this.socket = io.connect(this.server_url);
+
+    this.socket.on('connect', function() {
+        self.timer = setInterval(function() {
+            self.socket.emit('heartbeat');
+        }, 30000);
+
+        self.connected = true;
+    });
     
     this.create = function(cb) {
         self.socket.emit('create room', cb);
@@ -7341,7 +7352,23 @@ function room() {
             cb(data);
         });
     }
-    
+
+    this.onDisconnect = function() {
+        self.connected = false;
+        clearInterval(self.timer);
+        self.socket.on('disconnect', function(data) {
+            cb(data);
+        });
+    }
+
+    this.reConnect = function() {
+        self.socket = io.connect(self.server_url);
+    }
+
+    // this.onConnect = function(cb) {
+    //     cb();
+    // }
+    //
     return this;
 }
 
