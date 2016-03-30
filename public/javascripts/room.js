@@ -7354,10 +7354,10 @@ function room() {
     }
 
     this.onDisconnect = function(cb) {
-        self.socket.on('disconnect', function(data) {
+        self.socket.on('disconnect', function() {
             self.connected = false;
             clearInterval(self.timer);
-            cb(data);
+            cb();
         });
     }
 
