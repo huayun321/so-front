@@ -15,7 +15,7 @@
 
 ---
 1. 引入SENSORO.js到所要使用的H5页面中。
-2. 引入Room.js到所要使用的H5页面中。
+2. 引入room.js到所要使用的H5页面中。
 
 
 
@@ -44,7 +44,7 @@
 <script src="/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var room = new SENSORO.room('http://localhost:5000');
+        var room = SENSORO.room();
         console.log(room);
 //        room.create(function(roomName) {
 //            $('#roomName').text(roomName);
@@ -72,18 +72,17 @@
 
 ---
 
-### Room
-使用Room api 必须首先实例化一个window.SENSORO.Room对象，以初始化Room的配置，及使用各接口方法。
+### room
+使用room api 必须首先调用SENSORO.room方法，以初始化room的配置，及使用各接口方法。
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 ```
 
 
 
 
 
-### Room.create([callback])
+### room.create([callback])
 创建聊天或互动的房间.
 
 * callback function 创建成功后的回调函数，可选，会返回所创建的房间名。房间名格式为‘6c84fb90-12c4-11e1-840d-7b25c5ee775a’。
@@ -100,7 +99,7 @@ room.create(function(roomName) {
 });
 ```
 
-### Room.join(options[, callback])
+### room.join(options[, callback])
 加入指定房间。
 * options 必填参数。格式为{roomName:'6c84fb90-12c4-11e1-840d-7b25c5ee775a', joinMsg:'blabla'} key roomName 为必填key，joinMsg可选。填写joinMsg后，当加入成功会发送一条加入消息到房间内的所有人。消息为joinMsg的字符串值。
 * callback function 回调，可选填。加入成功后会返回本客户所在房间的序列号。
@@ -126,7 +125,7 @@ room.join(opts, function(index) {
 ```
 
 
-### Room.onJoin(callback)
+### room.onJoin(callback)
 当room.join调用成功，且当room.join 的options 配置中有joinMsg key时，会群发一条消息到所在room的所有人。此时，所有调用room.onJoin方法的页面会收到一条消息。
 
 * callback function回调方法。
@@ -155,7 +154,7 @@ room.onJoin(function(msg) {
 
 ```
 
-### Room.broadcast(roomName, msgObj)
+### room.broadcast(roomName, msgObj)
 广播一条消息到指定房间。
 
 * roomName string 必填。字符串类型，房间名称，格式为'6c84fb90-12c4-11e1-840d-7b25c5ee775a'。
@@ -176,7 +175,7 @@ room.broadcast(rName, msgObj);
 
 ```
 
-### Room.onBroadcast(callback)
+### room.onBroadcast(callback)
 监听当前所加入房间的broadcast事件。
 
 * callback function 回调方法。必填。
@@ -194,7 +193,7 @@ room.onBroadcast(function(msgObj) {
 ```
 
 
-### Room.broadcastNum(roomName)
+### room.broadcastNum(roomName)
 向指定房间内的所有客户端发送一条只包含该客户端在指定房间所在位置的序列号。
 
 * roomName string 必填。字符串类型，房间名称，格式为'6c84fb90-12c4-11e1-840d-7b25c5ee775a'。
@@ -209,7 +208,7 @@ room.broadcast(rName);
 
 ```
 
-### Room.onBroadcastNum(callback)
+### room.onBroadcastNum(callback)
 监听当前所加入房间的broadcastNum事件。
 
 * callback function 回调方法。必填。
@@ -227,7 +226,7 @@ room.onBroadcastNum(function(index) {
 
 ```
 
-### Room.onError(callback)
+### room.onError(callback)
 监听当前所加入房间的error事件。
 
 * callback function 回调方法。必填。
