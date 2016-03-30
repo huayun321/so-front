@@ -90,8 +90,7 @@ var room = SENSORO.room();
 
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 room.create(function(roomName) {
   console.log(roomName);
@@ -105,8 +104,7 @@ room.create(function(roomName) {
 * callback function 回调，可选填。加入成功后会返回本客户所在房间的序列号。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 var rName = '6c84fb90-12c4-11e1-840d-7b25c5ee775a';
 var myName = 'Susan';
@@ -131,8 +129,7 @@ room.join(opts, function(index) {
 * callback function回调方法。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 var rName = '6c84fb90-12c4-11e1-840d-7b25c5ee775a';
 var myName = 'Susan';
@@ -161,8 +158,7 @@ room.onJoin(function(msg) {
 * msgObj obj 必填。{}类型。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 var rName = '6c84fb90-12c4-11e1-840d-7b25c5ee775a';
 
@@ -181,8 +177,7 @@ room.broadcast(rName, msgObj);
 * callback function 回调方法。必填。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 var rName = '6c84fb90-12c4-11e1-840d-7b25c5ee775a';
 room.onBroadcast(function(msgObj) {
@@ -199,8 +194,7 @@ room.onBroadcast(function(msgObj) {
 * roomName string 必填。字符串类型，房间名称，格式为'6c84fb90-12c4-11e1-840d-7b25c5ee775a'。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 var rName = '6c84fb90-12c4-11e1-840d-7b25c5ee775a';
 
@@ -214,8 +208,7 @@ room.broadcast(rName);
 * callback function 回调方法。必填。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 room.onBroadcastNum(function(index) {
   console.log(index);
@@ -232,8 +225,7 @@ room.onBroadcastNum(function(index) {
 * callback function 回调方法。必填。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 room.onError(function(msgObj) {
   console.log(msgObj);
@@ -249,8 +241,7 @@ room.onError(function(msgObj) {
 * callback function 回调方法。必填。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 room.onDisconnect(function() {
   //执行重连获输出提示信息
@@ -264,8 +255,7 @@ room.onDisconnect(function() {
 * callback function 回调方法。必填。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 room.onConnect(function() {
   //当连接后执行某些操作
@@ -277,8 +267,7 @@ room.onConnect(function() {
 重新连接服务器。
 
 ```
-var url = 'http://localhost:5000';//接口服务器url
-var room = new SENSORO.room(url);
+var room = SENSORO.room();
 
 room.onDisconnect(function() {
   room.reConnect();
