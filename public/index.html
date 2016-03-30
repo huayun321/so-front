@@ -19,7 +19,7 @@
 <script src="/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var room = new SENSORO.room('http://room.oocomic.com');
+        var room = SENSORO.room();
         console.log(room);
 
         room.create(function(roomName) {

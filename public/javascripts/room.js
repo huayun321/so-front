@@ -7251,10 +7251,57 @@
 },{}]},{},[31])(31)
 });
 
-function Room(url) {
-    var self = this;
-    this.socket = io.connect(url);
+// function Room(url) {
+//     var self = this;
+//     this.socket = io.connect(url);
+//
+//     this.create = function(cb) {
+//         self.socket.emit('create room', cb);
+//     };
+//
+//     this.join = function (opts, cb) {
+//         self.socket.emit('join room', opts, cb);
+//     }
+//
+//     this.onJoin = function(cb) {
+//         self.socket.on('joined', function(data) {
+//             cb(data);
+//         });
+//     }
+//
+//     this.broadcast = function(roomName, msg) {
+//         self.socket.emit('broadcast room', roomName, msg);
+//     }
+//
+//     this.onBroadcast = function(cb) {
+//         self.socket.on('broadcast room', function(data) {
+//             cb(data);
+//         });
+//     }
+//
+//     this.broadcastNum = function(roomName) {
+//         self.socket.emit('broadcast num', roomName);
+//     }
+//
+//     this.onBroadcastNum = function(cb) {
+//         self.socket.on('broadcast num', function(data) {
+//             cb(data);
+//         });
+//     }
+//
+//     this.onError = function(cb) {
+//         self.socket.on('room error', function(data) {
+//             cb(data);
+//         });
+//     }
+// }
 
+
+function room() {
+    var server_url = 'http://room.oocomic.com';
+    var self = this;
+    this.socket = io.connect(server_url);
+    
     this.create = function(cb) {
         self.socket.emit('create room', cb);
     };
@@ -7294,7 +7341,10 @@ function Room(url) {
             cb(data);
         });
     }
+    
+    return this;
 }
 
+
 window.SENSORO = {};
-window.SENSORO.room  = Room;
+window.SENSORO.room  = room;
