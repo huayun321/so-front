@@ -198,7 +198,7 @@ var room = SENSORO.room();
 
 var rName = '6c84fb90-12c4-11e1-840d-7b25c5ee775a';
 
-room.broadcast(rName);
+room.broadcastNum(rName);
 
 ```
 
